@@ -1,4 +1,4 @@
-# CNN_para_Controle_de_Qualidade
+# Uso de Redes Neurais Convolucionais (CNN) para Controle de Qualidade
 
 Este estudo tem o objetivo de utilizar Redes Neurais Convolucionais para a identificação do padrão de qualidade de tomates. Ao final, o modelo deve ser capaz de identificar as seguintes classes de tomates:
 
