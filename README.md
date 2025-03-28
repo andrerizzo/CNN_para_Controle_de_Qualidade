@@ -62,8 +62,6 @@ O modelo final foi capaz de identificar as seguintes classes de tomates:
 
 ---
 
-#---
-
 ### 👨‍💻 Sobre o Autor
 
 **André Rizzo**  
