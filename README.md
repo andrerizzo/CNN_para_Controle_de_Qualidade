@@ -1,67 +1,77 @@
 # **Uso de Redes Neurais Convolucionais (CNN) para Controle de Qualidade**
 
 ## **Visão Geral**
-Este projeto implementa uma solução de **Controle de Qualidade Automatizado** baseada em **Visão Computacional**. Utilizando **Redes Neurais Convolucionais (CNN)** e **Transfer Learning**, o sistema realiza a detecção e classificação de defeitos em imagens de produtos, substituindo inspeções manuais tradicionais por um processo eficiente e preciso.  
-Para este estudo utilizei a base de imagens https://www.kaggle.com/datasets/enalis/tomatoes-dataset, onde ao final, o modelo foi capaz de identificar as seguintes classes de tomates:
-* Verdes
-* Maduros
-* Velhos
-* Danificados
+Este projeto implementa uma solução de **Controle de Qualidade Automatizado** baseada em **Visão Computacional**. Utilizando **Redes Neurais Convolucionais (CNNs)** e **Transfer Learning**, o sistema realiza a detecção e classificação de defeitos em imagens de produtos, substituindo inspeções manuais tradicionais por um processo mais eficiente e preciso.  
+
+Neste estudo, foi utilizada a base de dados:  
+🔗 [Tomatoes Dataset (Kaggle)](https://www.kaggle.com/datasets/enalis/tomatoes-dataset)
+
+O modelo final foi capaz de identificar as seguintes classes de tomates:
+- 🍅 Verdes  
+- 🍅 Maduros  
+- 🍅 Velhos  
+- 🍅 Danificados
 
 ---
 
 ## **Objetivo**
-* Automatizar o processo de inspeção de qualidade.  
-* Detectar e classificar defeitos com alta acurácia.  
-* Reduzir o tempo e os erros associados à inspeção manual.  
+- Automatizar o processo de inspeção de qualidade  
+- Detectar e classificar defeitos com alta acurácia  
+- Reduzir tempo e erros associados à inspeção manual  
 
----  
+---
 
 ## **Tecnologias Utilizadas**
-* Linguagem: Python  
-* Bibliotecas Principais:
-   * TensorFlow / Keras
-   * Scikit-learn
-   * Pandas / NumPy
-   * Matplotlib / Seaborn
-* Modelo Pré-Treinado (Transfer Learning):
-   * **VGG-16**  
-* Ambiente de Desenvolvimento:
-   * Google Colab
+- **Linguagem:** Python  
+- **Bibliotecas Principais:**
+  - TensorFlow / Keras
+  - Scikit-learn
+  - Pandas / NumPy
+  - Matplotlib / Seaborn
+- **Modelo Pré-Treinado:** VGG-16 (Transfer Learning)
+- **Ambiente de Desenvolvimento:** Google Colab
 
 ---
 
-## **Arquitetura do Projeto**  
+## **Arquitetura do Projeto**
 
-1. **Pré-Processamento das Imagens:**
-* Redimensionamento das imagens para 224x224 pixels.
-* Normalização dos valores dos pixels para a faixa [0, 1].
+### 1. Pré-processamento das Imagens
+- Redimensionamento para 224x224 pixels  
+- Normalização dos valores de pixel para o intervalo [0, 1]  
 
-2. **Modelagem com Redes Neurais Convolucionais (CNN):**
-* Implementação de modelos baseados em VGG-16 com Transfer Learning.
-* Congelamento dos parâmetros das camadas superiores das camadas superiores do modelos pré-treinado.
-* Remoção das camadas densas do modelo original.  
-* Adição de novas camadas com quatro neurônios de saída e função de ativação SoftmaxAdição para a tarefa de classificação.
-* Fine-tuning do novo modelo.
+### 2. Modelagem com CNN (VGG-16)
+- Utilização de modelo pré-treinado com congelamento das camadas convolucionais
+- Remoção das camadas densas originais
+- Adição de novas camadas densas para classificação com 4 neurônios (softmax)
+- Aplicação de **fine-tuning** nas camadas superiores
 
-3. **Treinamento e Validação:**  
-* Separação dos dados: 60% Treinamento, 20% Validação e 20% Teste.
-* Uso de Cross-Entropy Loss e Adam Optimizer com taxa de aprendizado ajustada.
-* Monitoramento da performance utilizando Acurácia e Loss.
+### 3. Treinamento e Validação
+- Divisão dos dados: 60% Treino, 20% Validação, 20% Teste
+- Otimizador: Adam  
+- Função de perda: Categorical Crossentropy  
+- Métricas: Acurácia e Loss
 
-4. **Resultados:**
-* Acurácia Final do Modelo: 98%
-* Tempo Médio de Inferência: ~20ms por imagem.
-* Estimativa de redução de 70% em comparação com o tempo de inspeção manual.
+### 4. Resultados
+- 📈 **Acurácia final:** 98%  
+- ⚡ **Tempo médio de inferência:** ~20ms por imagem  
+- ⏱️ **Redução estimada de tempo:** ~70% em relação à inspeção manual  
 
-5. **Próximos Passos:**
-* Implementar uma interface gráfica (GUI) para facilitar a utilização por usuários não técnicos.
-* Explorar outros modelos pré-treinados em busca de melhorias adicionais.
+### 5. Próximos Passos
+- Desenvolver uma interface gráfica (GUI) para uso por usuários não técnicos
+- Avaliar outros modelos pré-treinados para comparação de desempenho
 
 ---
 
-## Contato
-* **Autor:** André Rizzo
-* **LinkedIn:** linkedin.com/in/andrerizzo1
-* **GitHub:** github.com/andrerizzo
-* **Email:** andrerizzo@hotmail.com
+#---
+
+### 👨‍💻 Sobre o Autor
+
+**André Rizzo**  
+📊 Cientista de Dados Sênior | Estatístico | MBA em IA e Big Data (USP)  
+🧠 Especialista em Machine Learning, Deep Learning e Modelagem Estatística  
+📍 Rio de Janeiro, Brasil  
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Perfil-0077B5?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/andrerizzo1)
+[![GitHub](https://img.shields.io/badge/GitHub-Portfólio-181717?logo=github&logoColor=white)](https://github.com/andrerizzo)
+[![Email](https://img.shields.io/badge/Email-andrerizzo@hotmail.com-D14836?logo=gmail&logoColor=white)](mailto:andrerizzo@hotmail.com)
+
