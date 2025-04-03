@@ -8,10 +8,10 @@ Responsável por baixar e extrair o dataset do Kaggle.
 
 import os
 import zipfile
-import requests
 import shutil
+import gdown    
 
-def download_and_extract_github_dataset(github_url, download_path, extract_path):
+def download_and_extract_dataset(gdrive_url, download_path, extract_path):
     """
     Faz o download de um arquivo do GitHub (via URL raw) e, se for um ZIP, pode extrair seu conteúdo.
 
@@ -24,36 +24,24 @@ def download_and_extract_github_dataset(github_url, download_path, extract_path)
         None
     """
 
+    # Cria diretório de download, se necessário
     os.makedirs(download_path, exist_ok=True)
 
-    # Baixa o dataset do GitHub
-    response = requests.get(github_url)
-    
-    # Verifica se o arquivo existe
-    if response.status_code == 200:
-        # Extrai o nome do arquivo da URL
-        file_name = github_url.rsplit('/', 1)[-1] 
-        dest_path = os.path.join(download_path, file_name)
-        
-        # Salva o arquivo localmente
-        with open(dest_path, 'wb') as f:
-            print(f'Arquivo {file_name} sendo baixado ...')
-            f.write(response.content)
-        print(f'Arquivo {file_name} baixado com sucesso para {download_path}')
+    # Caminho completo do arquivo a ser salvo
+    zip_file_path = os.path.join(download_path, "tomates_dataset.zip")
+
+    # Baixa o arquivo
+    print("Baixando dataset do Google Drive...")
+    gdown.download(gdrive_url, output=zip_file_path, quiet=False)
+
+    # Verifica se o arquivo foi baixado
+    if os.path.exists(zip_file_path):
+        print(f"Extraindo {zip_file_path}...")
+        with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+            zip_ref.extractall(extract_path)
+        print(f"Extração concluída em: {extract_path}")
     else:
-        print(f"Falha no download. Erro: {response.status_code}")          
-    
-
-    # Extrai imagens do arquivo .zip
-    print(f"Extraindo {file_name}...")
-    with zipfile.ZipFile(dest_path, 'r') as zip_ref:
-        zip_ref.extractall(extract_path)
-
-    print("Imagens descompactadas com sucesso.")
-
-    # Apaga o arquivo .zip
-    os.remove(dest_path)
-    print(f'\nArquivo {file_name} excluído com sucesso!')
+        print("Erro: o arquivo não foi baixado corretamente.")
 
 
 
