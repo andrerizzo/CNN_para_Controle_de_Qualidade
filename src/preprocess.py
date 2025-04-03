@@ -9,7 +9,10 @@ Inclui renomeação de diretórios e geração de ImageDataGenerators para trein
 
 import tensorflow as tf
 from tensorflow.keras.utils import image_dataset_from_directory
-from tensorflow.keras.applications.vgg16 import preprocess_input
+from tensorflow.keras.applications.vgg16 import preprocess_input as vgg16_preprocess_input
+from tensorflow.keras.applications.resnet50 import preprocess_input as resnet50_preprocess_input
+ 
+from tensorflow.keras import layers
 
 def train_val_test_generators(img_path, img_size, bt_size, val_split, test_split):
     '''
@@ -68,6 +71,34 @@ def train_val_test_generators(img_path, img_size, bt_size, val_split, test_split
     return train_dataset, val_dataset, test_dataset, class_names
 
 
+def get_data_augmentation_pipeline():
+    """
+    Cria um pipeline de data augmentation com camadas do Keras.
+
+    Returns:
+        tf.keras.Sequential: pipeline com transformações para imagens.
+    """
+    return tf.keras.Sequential([
+        layers.RandomFlip("horizontal_and_vertical"),
+        layers.RandomRotation(0.2),
+        layers.RandomZoom(0.1),
+        layers.RandomContrast(0.1)
+    ])
+
+
+def apply_data_augmentation(dataset, augmentation_layer):
+    """
+    Aplica data augmentation a um tf.data.Dataset.
+
+    Args:
+        dataset (tf.data.Dataset): Dataset de treino.
+        augmentation_layer (tf.keras.Sequential): Pipeline de data augmentation.
+
+    Returns:
+        tf.data.Dataset: Dataset com as transformações aplicadas.
+    """
+    return dataset.map(lambda x, y: (augmentation_layer(x, training=True), y))
+
 
 
 def vgg16_pre_processing(train_ds, val_ds, test_ds):
@@ -78,19 +109,45 @@ def vgg16_pre_processing(train_ds, val_ds, test_ds):
         train_ds, val_ds, test_ds (tf.data.Dataset): Datasets de treino, validação e teste.
 
     Returns:
-        tuple: (train_ds, val_ds, test_ds) com as imagens pré-processadas.
+        tuple: (train_ds_vgg16, val_ds_vgg16, test_ds_vgg16) com as imagens pré-processadas.
     """
 
     AUTOTUNE = tf.data.AUTOTUNE
 
-    train_ds = train_ds.map(lambda x, y: (preprocess_input(x), y))
-    val_ds = val_ds.map(lambda x, y: (preprocess_input(x), y))
-    test_ds = test_ds.map(lambda x, y: (preprocess_input(x), y))
+    train_ds = train_ds.map(lambda x, y: (vgg16_preprocess_input(x), y))
+    val_ds = val_ds.map(lambda x, y: (vgg16_preprocess_input(x), y))
+    test_ds = test_ds.map(lambda x, y: (vgg16_preprocess_input(x), y))
 
 
     # Adiciona prefetch para melhorar desempenho
-    train_ds = train_ds.prefetch(buffer_size=AUTOTUNE)
-    val_ds = val_ds.prefetch(buffer_size=AUTOTUNE)
-    test_ds = test_ds.prefetch(buffer_size=AUTOTUNE)
+    train_ds_vgg16 = train_ds.prefetch(buffer_size=AUTOTUNE)
+    val_ds_vgg16 = val_ds.prefetch(buffer_size=AUTOTUNE)
+    test_ds_vgg16 = test_ds.prefetch(buffer_size=AUTOTUNE)
 
-    return train_ds, val_ds, test_ds
+    return train_ds_vgg16, val_ds_vgg16, test_ds_vgg16
+
+
+def resnet50_pre_processing(train_ds, val_ds, test_ds):
+    """
+    Aplica o pré-processamento necessário para a ResNet50 em datasets do tipo tf.data.Dataset.
+
+    Args:
+        train_ds, val_ds, test_ds (tf.data.Dataset): Datasets de treino, validação e teste.
+
+    Returns:
+        tuple: (train_ds_resnet50, val_ds_resnet50, test_ds_resnet50) com as imagens pré-processadas.
+    """
+
+    AUTOTUNE = tf.data.AUTOTUNE
+
+    train_ds = train_ds.map(lambda x, y: (resnet50_preprocess_input(x), y))
+    val_ds = val_ds.map(lambda x, y: (resnet50_preprocess_input(x), y))
+    test_ds = test_ds.map(lambda x, y: (resnet50_preprocess_input(x), y))
+
+
+    # Adiciona prefetch para melhorar desempenho
+    train_ds_resnet50 = train_ds.prefetch(buffer_size=AUTOTUNE)
+    val_ds_resnet50 = val_ds.prefetch(buffer_size=AUTOTUNE)
+    test_ds_resnet50 = test_ds.prefetch(buffer_size=AUTOTUNE)
+
+    return train_ds_resnet50, val_ds_resnet50, test_ds_resnet50
