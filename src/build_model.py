@@ -87,7 +87,7 @@ def build_model_vgg16_v2(input_shape=(224, 224, 3), num_classes=4):
     x = base_model_vgg16_v2.output
     x = Flatten()(x)
     x = Dense(256, activation='relu')(x)
-    x = Dropout(0.4)(x)
+    x = Dropout(0.5)(x)
     predictions_vgg16_v2 = Dense(num_classes, activation='softmax')(x)
 
     model_vgg16_v2 = Model(inputs=base_model_vgg16_v2.input, outputs=predictions_vgg16_v2)
