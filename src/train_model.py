@@ -2,8 +2,17 @@
 Arquivo: train_model.py
 Autor: André Rizzo
 
-Módulo de treinamento para o modelo CNN de classificação de tomates.
-Inclui função para treinar, validar e salvar o modelo.
+
+Módulo responsável pelo treinamento do modelo CNN de classificação de tomates, utilizando arquitetura 
+baseada em Transfer Learning.
+Inclui a função principal `train_model`, que realiza o treinamento do modelo com uso de callbacks para:
+    - Salvamento do melhor modelo com base na acurácia de validação
+    - Interrupção antecipada (EarlyStopping) com restauração dos melhores pesos
+    - Redução da taxa de aprendizado quando a validação estagnar (ReduceLROnPlateau)
+
+Funções:
+    - train_model(model, train_images, val_images, ...):
+        Executa o processo de treinamento com os datasets fornecidos e aplica os callbacks para otimização e controle de overfitting.
 '''
 
 import os
@@ -21,23 +30,7 @@ def train_model(model,
                 patienceROP=5,
                 min_lr_ROP=0.0001):
     """
-    Arquivo: train_model.py
-    Autor: André Rizzo
-
-    Descrição:
-    -----------
-    Módulo responsável pelo treinamento do modelo CNN de classificação de tomates, utilizando arquitetura 
-    baseada em Transfer Learning.
-    Inclui a função principal `train_model`, que realiza o treinamento do modelo com uso de callbacks para:
-    - Salvamento do melhor modelo com base na acurácia de validação
-    - Interrupção antecipada (EarlyStopping) com restauração dos melhores pesos
-    - Redução da taxa de aprendizado quando a validação estagnar (ReduceLROnPlateau)
-
-    Funções:
-    ---------
-    - train_model(model, train_images, val_images, ...):
-        Executa o processo de treinamento com os datasets fornecidos e aplica os callbacks para otimização e controle de overfitting.
-
+    
     Parâmetros:
     ------------
     - model (tf.keras.Model): Modelo já compilado.
