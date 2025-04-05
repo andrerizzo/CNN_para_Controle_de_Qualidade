@@ -1,10 +1,9 @@
 # **Uso de Redes Neurais Convolucionais (CNN) para Controle de Qualidade**
 
 ## **Visão Geral**
-Este projeto implementa uma solução de **Controle de Qualidade Automatizado** baseada em **Visão Computacional**. Utilizando **Redes Neurais Convolucionais (CNNs)** e **Transfer Learning**, o sistema realiza a detecção e classificação de defeitos em imagens de produtos, substituindo inspeções manuais tradicionais por um processo mais eficiente e preciso.  
+Este projeto implementa uma solução de **Controle de Qualidade Automatizado** baseada em **Visão Computacional**. Utilizando **Redes Neurais Convolucionais (CNNs)** e **Transfer Learning**, o sistema realiza a detecção e classificação de defeitos em imagens de produtos, substituindo inspeções manuais por um processo mais eficiente e preciso.  
 
-Neste estudo, foi utilizada a base de dados:  
-🔗 [Tomatoes Dataset (Kaggle)](https://www.kaggle.com/datasets/enalis/tomatoes-dataset)
+🔗 Dataset utilizado: [Tomatoes Dataset (Kaggle)](https://www.kaggle.com/datasets/enalis/tomatoes-dataset)
 
 O modelo final foi capaz de identificar as seguintes classes de tomates:
 - 🍅 Verdes  
@@ -28,7 +27,7 @@ O modelo final foi capaz de identificar as seguintes classes de tomates:
   - Scikit-learn
   - Pandas / NumPy
   - Matplotlib / Seaborn
-- **Modelo Pré-Treinado:** VGG-16 (Transfer Learning)
+- **Modelos Pré-Treinados:** VGG-16 e ResNet50
 - **Ambiente de Desenvolvimento:** Google Colab
 
 ---
@@ -39,30 +38,113 @@ O modelo final foi capaz de identificar as seguintes classes de tomates:
 - Redimensionamento para 224x224 pixels  
 - Normalização dos valores de pixel para o intervalo [0, 1]  
 
-### 2. Modelagem com CNN (VGG-16)
-- Utilização de modelo pré-treinado com congelamento das camadas convolucionais
-- Remoção das camadas densas originais
-- Adição de novas camadas densas para classificação com 4 neurônios (softmax)
-- Aplicação de **fine-tuning** nas camadas superiores
+### 2. Modelagem com CNN
+- Utilização de modelos pré-treinados (VGG16 e ResNet50)
+- Congelamento das camadas convolucionais
+- Adição de camadas densas customizadas
+- Fine-tuning nas camadas superiores em versões "v2"
 
 ### 3. Treinamento e Validação
 - Divisão dos dados: 60% Treino, 20% Validação, 20% Teste
 - Otimizador: Adam  
-- Função de perda: Categorical Crossentropy  
+- Função de perda: Categorical Focal Crossentropy  
 - Métricas: Acurácia e Loss
-
-### 4. Resultados
-- 📈 **Acurácia final:** 98%  
-- ⚡ **Tempo médio de inferência:** ~20ms por imagem  
-- ⏱️ **Redução estimada de tempo:** ~70% em relação à inspeção manual  
-
-### 5. Próximos Passos
-- Desenvolver uma interface gráfica (GUI) para uso por usuários não técnicos
-- Avaliar outros modelos pré-treinados para comparação de desempenho
 
 ---
 
-### 👨‍💻 Sobre o Autor
+## 🧪 Modelos Avaliados
+
+Durante o desenvolvimento, foram implementadas e comparadas quatro variações baseadas em redes pré-treinadas:
+
+| Modelo              | Backbone     | Estratégia                       |
+|---------------------|--------------|----------------------------------|
+| VGG16               | VGG16        | Transfer Learning (camadas congeladas) |
+| VGG16 (V2)          | VGG16        | Fine-tuning nas camadas superiores |
+| ResNet50            | ResNet50     | Transfer Learning (camadas congeladas) |
+| ResNet50 (V2)       | ResNet50     | Fine-tuning nas camadas superiores |
+
+---
+
+## 📊 Comparativo de Desempenho
+
+### Acurácia e Tempo de Inferência
+
+![Comparação de Acurácia](img/comparacao_acuracia_corrigida.png)  
+![Tempo de Inferência](img/comparacao_inferencia_corrigida.png)v
+
+### Tabela Comparativa
+
+| Modelo         | Acurácia | 
+|----------------|----------|
+| VGG16          |      98%  | 
+| VGG16 (V2)     |      97%       | 
+| ResNet50       |      96%       | 
+| **ResNet50 (V2)**  | **99%**    | 
+
+> 🔹 O modelo **ResNet50 (V2)** apresentou o melhor desempenho geral e foi selecionado como modelo final do projeto.
+
+---
+
+## 📈 Avaliação Detalhada por Modelo
+
+### 📋 Relatórios de Classificação (base de teste)
+
+- **VGG16**  
+![](/img/Classification_report_VGG16.png)
+
+- **VGG16 (V2)**  
+![](/img/Classification_report_VGG16v2.png)  
+
+- **ResNet50**  
+![](/img/Classification_report_ResNet50.png)  
+
+- **ResNet50 (V2)**  
+![](/img/Classification_report_ResNet50v2.png) 
+
+---
+
+### 🔄 Matrizes de Confusão
+
+Inserir abaixo as imagens geradas para cada modelo:
+
+| Modelo         | Matriz de Confusão |
+|----------------|--------------------|
+| VGG16          | ![](/img/Confusion_Matrix_VGG16.png) |
+| VGG16 (V2)     | ![](/img/Confusion_Matrix_VGG16v2.png) |
+| ResNet50       | ![](/img/Confusion_Matrix_ResNet50.png)|
+| ResNet50 (V2)  | ![](/img/Confusion_Matrix_ResNet50v2.png) |
+
+---
+
+## 🔍 Exemplos Visuais de Inferência
+
+Inserir imagens reais do dataset com as classificações corretas e incorretas para ilustrar o funcionamento do modelo final:
+
+```markdown
+| Classe Verdadeira | Previsão | Imagem |
+|-------------------|----------|--------|
+| Maduro            | Maduro ✅ | ![img1](imagens/maduro1.png) |
+| Danificado        | Maduro ❌ | ![img2](imagens/erro2.png) |
+```
+
+---
+
+## 🧠 Visualização com Grad-CAM (opcional)
+
+Inserir visualizações com Grad-CAM para explicar as decisões do modelo final:
+
+![Grad-CAM](imagens/gradcam_tomato.png)
+
+---
+
+## **Próximos Passos**
+- Desenvolver uma interface gráfica (GUI) com Streamlit ou Gradio
+- Publicar modelo via API para produção
+- Realizar testes com novos datasets para robustez
+
+---
+
+## 👨‍💻 Sobre o Autor
 
 **André Rizzo**  
 📊 Cientista de Dados Sênior | Estatístico | MBA em IA e Big Data (USP)  
@@ -73,3 +155,5 @@ O modelo final foi capaz de identificar as seguintes classes de tomates:
 [![GitHub](https://img.shields.io/badge/GitHub-Portfólio-181717?logo=github&logoColor=white)](https://github.com/andrerizzo)
 [![Email](https://img.shields.io/badge/Email-andrerizzo@hotmail.com-D14836?logo=gmail&logoColor=white)](mailto:andrerizzo@hotmail.com)
 
+
+[def]: /img/Classification_report_ResNet50v2.png
