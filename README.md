@@ -29,6 +29,8 @@ O modelo final foi capaz de identificar as seguintes classes de tomates:
   - Matplotlib / Seaborn
 - **Modelos Pré-Treinados:** VGG-16 e ResNet50
 - **Ambiente de Desenvolvimento:** Google Colab
+- Todo o pipeline de treinamento foi executado em ambiente **Google Colab**, com uso de GPU **NVIDIA A100 (versão premium)**.  
+
 
 ---
 
@@ -67,10 +69,10 @@ Durante o desenvolvimento, foram implementadas e comparadas quatro variações b
 
 ## 📊 Comparativo de Desempenho
 
-### Acurácia e Tempo de Inferência
+### Acurácia
 
-![Comparação de Acurácia](img/comparacao_acuracia_corrigida.png)  
-![Tempo de Inferência](img/comparacao_inferencia_corrigida.png)v
+![](/img/Accuracy_graph.png)  
+
 
 ### Tabela Comparativa
 
@@ -107,7 +109,7 @@ Durante o desenvolvimento, foram implementadas e comparadas quatro variações b
 
 Inserir abaixo as imagens geradas para cada modelo:
 
-| Modelo         | Matriz de Confusão |
+| Modelo         |  |
 |----------------|--------------------|
 | VGG16          | ![](/img/Confusion_Matrix_VGG16.png) |
 | VGG16 (V2)     | ![](/img/Confusion_Matrix_VGG16v2.png) |
@@ -116,31 +118,9 @@ Inserir abaixo as imagens geradas para cada modelo:
 
 ---
 
-## 🔍 Exemplos Visuais de Inferência
-
-Inserir imagens reais do dataset com as classificações corretas e incorretas para ilustrar o funcionamento do modelo final:
-
-```markdown
-| Classe Verdadeira | Previsão | Imagem |
-|-------------------|----------|--------|
-| Maduro            | Maduro ✅ | ![img1](imagens/maduro1.png) |
-| Danificado        | Maduro ❌ | ![img2](imagens/erro2.png) |
-```
-
----
-
-## 🧠 Visualização com Grad-CAM (opcional)
-
-Inserir visualizações com Grad-CAM para explicar as decisões do modelo final:
-
-![Grad-CAM](imagens/gradcam_tomato.png)
-
----
-
 ## **Próximos Passos**
 - Desenvolver uma interface gráfica (GUI) com Streamlit ou Gradio
 - Publicar modelo via API para produção
-- Realizar testes com novos datasets para robustez
 
 ---
 
@@ -155,5 +135,3 @@ Inserir visualizações com Grad-CAM para explicar as decisões do modelo final:
 [![GitHub](https://img.shields.io/badge/GitHub-Portfólio-181717?logo=github&logoColor=white)](https://github.com/andrerizzo)
 [![Email](https://img.shields.io/badge/Email-andrerizzo@hotmail.com-D14836?logo=gmail&logoColor=white)](mailto:andrerizzo@hotmail.com)
 
-
-[def]: /img/Classification_report_ResNet50v2.png
