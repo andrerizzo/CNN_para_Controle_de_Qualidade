@@ -1,0 +1,81 @@
+# ========================================
+# SISTEMA E TEMPORÁRIOS
+# ========================================
+.DS_Store
+Thumbs.db
+__pycache__/
+*.py[cod]
+*.so
+*.log
+*.tmp
+.mypy_cache/
+*.swp
+.env
+*.bak
+*.bak.md
+.vscode/
+.idea/
+*.ipynb_checkpoints
+
+# ========================================
+# DADOS
+# ========================================
+/data/
+!/data/README.md
+/data/**/*.zip
+/data/**/*.csv
+/data/**/*.json
+
+# ========================================
+# MODELOS
+# ========================================
+/models/
+!/models/README.md
+/models/**/*.h5
+/models/**/*.keras
+/models/**/*.ckpt
+/models/**/*.pth
+/models/**/*.tflite
+/models/**/*.joblib
+/models/**/*.pkl
+
+# ========================================
+# IMAGENS E VISUALIZAÇÕES
+# ========================================
+/img/
+!/img/README.md
+*.png
+*.jpg
+*.jpeg
+
+# ========================================
+# NOTEBOOKS ANTIGOS / BACKUP
+# ========================================
+/OLD/
+*.old.ipynb
+*checkpoint.ipynb
+*checkpoint.*
+
+# ========================================
+# STREAMLIT E INTERFACE
+# ========================================
+/front_end/__pycache__/
+*.db
+*.sqlite
+
+# ========================================
+# SCRIPTS TEMPORÁRIOS
+# ========================================
+tempCodeRunnerFile.*
+data_acquisition.v1.py
+src/main_script.py
+
+# ========================================
+# ARQUIVOS ESPECÍFICOS DO COLAB
+# ========================================
+*.nbconvert.ipynb
+
+# ========================================
+# OUTROS ARQUIVOS
+# ========================================
+notebooks/CNNs para Controle de Qualidade.ipynb
