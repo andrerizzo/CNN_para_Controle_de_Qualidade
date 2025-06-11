@@ -31,6 +31,7 @@ O modelo final foi capaz de identificar as seguintes classes de tomates:
   - Scikit-learn
   - Pandas / NumPy
   - Matplotlib / Seaborn
+  - OpenCV
 - **Modelos Pré-Treinados:** VGG-16 e ResNet50
 - **Ambiente de Desenvolvimento:** Google Colab
 - Todo o pipeline de treinamento foi executado em ambiente **Google Colab**, com uso de GPU **NVIDIA A100 (versão premium)**.
@@ -46,9 +47,9 @@ O modelo final foi capaz de identificar as seguintes classes de tomates:
 
 ### 2. Modelagem com CNN
 
-- Utilização de modelos pré-treinados (VGG16 e ResNet50)
-- Congelamento das camadas convolucionais
-- Adição de camadas densas customizadas
+- Utilização de modelos base VGG16 e ResNet50   
+- Congelamento das camadas convolucionais  
+- Adição de camadas densas customizadas  
 - Fine-tuning nas camadas superiores em versões "v2"
 
 ### 3. Treinamento e Validação
@@ -67,9 +68,9 @@ Durante o desenvolvimento, foram implementadas e comparadas quatro variações b
 | Modelo        | Backbone | Estratégia                            |
 | ------------- | -------- | -------------------------------------- |
 | VGG16         | VGG16    | Transfer Learning (camadas congeladas) |
-| VGG16 (V2)    | VGG16    | Fine-tuning nas camadas superiores     |
+| VGG16 v2      | VGG16    | Fine-tuning nas camadas superiores     |
 | ResNet50      | ResNet50 | Transfer Learning (camadas congeladas) |
-| ResNet50 (V2) | ResNet50 | Fine-tuning nas camadas superiores     |
+| ResNet50 v2   | ResNet50 | Fine-tuning nas camadas superiores     |
 
 ---
 
@@ -84,9 +85,9 @@ Durante o desenvolvimento, foram implementadas e comparadas quatro variações b
 | Modelo                  | Acurácia     |
 | ----------------------- | ------------- |
 | VGG16                   | 98%           |
-| VGG16 (V2)              | 97%           |
+| VGG16 v2                | 97%           |
 | ResNet50                | 96%           |
-| **ResNet50 (V2)** | **99%** |
+| **ResNet50 v2**         | **99%** |
 
 > 🔹 O modelo **ResNet50 (V2)** apresentou o melhor desempenho geral e foi selecionado como modelo final do projeto.
 
@@ -96,23 +97,28 @@ Durante o desenvolvimento, foram implementadas e comparadas quatro variações b
 
 ### 📋 Relatórios de Classificação (base de teste)
 
-- **VGG16**![](/images/Classification_Report_VGG16.png)
-- **VGG16 (V2)**![](/images/Classification_Report_VGG16v2.png)
-- **ResNet50**![](/images/Classification_Report_ResNet50.png)
-- **ResNet50 (V2)**![](/images/Classification_Report_ResNet50v2.png)
+  **VGG16**  
+  ![](images/Classification_Report_VGG16.png)  
+
+  **VGG16 v2**  
+  ![](images/Classification_Report_VGG16v2.png)  
+
+  **ResNet50**  
+  ![](images/Classification_Report_ResNet50.png)  
+
+  **ResNet50 v2**    
+  ![](images/Classification_Report_ResNet50v2.png)  
 
 --- 
 
 ### 🔄 Matrizes de Confusão
 
-Inserir abaixo as imagens geradas para cada modelo:
-
 | Modelo        |                                         |
 | ------------- | --------------------------------------- |
-| VGG16         | ![](/images/Confusion_Matrix_VGG16.png)      |
-| VGG16 (V2)    | ![](/images/Confusion_Matrix_VGG16v2.png)    |
-| ResNet50      | ![](/images/Confusion_Matrix_ResNet50.png)   |
-| ResNet50 (V2) | ![](/images/Confusion_Matrix_ResNet50v2.png) |
+| VGG16         | ![](images/Confusion_Matrix_VGG16.png)      |
+| VGG16 v2      | ![](images/Confusion_Matrix_VGG16v2.png)    |
+| ResNet50      | ![](images/Confusion_Matrix_ResNet50.png)   |
+| ResNet50 v2   | ![](images/Confusion_Matrix_ResNet50v2.png) |
 
 ---
 
